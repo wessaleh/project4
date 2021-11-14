@@ -10,5 +10,22 @@ public abstract class Pizza {
 
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
     protected Size size;
+
+    /**
+     * Calculates the price of the pizza
+     * @return - the price of the pizza
+     */
     public abstract double price();
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Deluxe pizza, ");
+
+        for(Topping topping: toppings){
+            sb.append(topping + ", ");
+        }
+
+        sb.append(this.price());
+        return sb.toString();
+    }
 }

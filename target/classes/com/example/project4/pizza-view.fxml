@@ -13,17 +13,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="com.example.project4.PizzaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4.PizzaController">
    <center>
       <VBox prefHeight="516.0" prefWidth="446.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="189.0" prefWidth="430.0">
                <children>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: &quot;black&quot;;" text="Deluxe" textFill="WHITE">
+                  <Button fx:id="pizzaLabel" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: &quot;black&quot;;" text="Deluxe" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="174.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="pizzaImage" fitHeight="174.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Deluxe.jpeg" />
                            </image>
@@ -46,7 +44,7 @@
                               <Insets left="25.0" top="70.0" />
                            </VBox.margin>
                         </Label>
-                        <ComboBox prefHeight="26.0" prefWidth="127.0">
+                        <ComboBox fx:id="pizzaSize" prefHeight="26.0" prefWidth="127.0">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -70,7 +68,7 @@
                               <Insets left="20.0" top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <ListView prefHeight="194.0" prefWidth="139.0">
+                        <ListView fx:id="toppingsList" prefHeight="194.0" prefWidth="139.0">
                            <VBox.margin>
                               <Insets left="20.0" top="5.0" />
                            </VBox.margin>
@@ -79,12 +77,12 @@
                   </VBox>
                   <VBox prefHeight="257.0" prefWidth="106.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="add &gt;&gt;">
+                        <Button mnemonicParsing="false" onAction="#addTopping" prefHeight="26.0" prefWidth="76.0" text="add &gt;&gt;">
                            <VBox.margin>
                               <Insets left="10.0" top="90.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="&lt;&lt; remove">
+                        <Button mnemonicParsing="false" onAction="#removeTopping" text="&lt;&lt; remove">
                            <VBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </VBox.margin>
@@ -101,7 +99,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <ListView prefHeight="194.0" prefWidth="165.0">
+                        <ListView fx:id="selectedToppings" prefHeight="194.0" prefWidth="165.0">
                            <VBox.margin>
                               <Insets right="20.0" top="8.0" />
                            </VBox.margin>
@@ -117,12 +115,12 @@
                         <Insets left="50.0" top="30.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField>
+                  <TextField fx:id="price" editable="false">
                      <HBox.margin>
                         <Insets left="2.0" top="30.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="136.0" text="Add to order">
+                  <Button fx:id="addPizzaToOrder" mnemonicParsing="false" prefHeight="26.0" prefWidth="136.0" text="Add to order">
                      <HBox.margin>
                         <Insets left="20.0" top="30.0" />
                      </HBox.margin>

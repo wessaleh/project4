@@ -1,6 +1,12 @@
 package com.example.project4;
 
 public class PizzaMaker {
+
+    /**
+     * Creates an instance of pizza
+     * @param flavor - the flavor of pizza
+     * @return the pizza
+     */
     public static Pizza createPizza(String flavor){
         if(flavor.equals("Hawaiian")){
             return new Hawaiian();

@@ -5,11 +5,19 @@ import java.util.ArrayList;
 public class Hawaiian extends Pizza{
     private final double DEFAULT_PRICE = 10.99;
 
+    /**
+     * Default constructor for hawaiian pizza
+     */
     public Hawaiian(){
         this.toppings = new ArrayList<Topping>();
         this.size = Size.Small;
     }
 
+    /**
+     * Constructor for hawaiian pizza
+     * @param toppings - toppings on the pizza
+     * @param size - size of pizza
+     */
     public Hawaiian(ArrayList<Topping> toppings, Size size){
         this.toppings = toppings;
         this.size = size;
@@ -27,7 +35,7 @@ public class Hawaiian extends Pizza{
         }
 
         if(numToppings > 2){
-            totalPrice += EXTRA_TOPPINGS_CHARGE * (MAX_TOPPINGS - numToppings);
+            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - 2);
         }
 
         return totalPrice;
