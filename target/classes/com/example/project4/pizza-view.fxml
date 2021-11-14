@@ -44,7 +44,7 @@
                               <Insets left="25.0" top="70.0" />
                            </VBox.margin>
                         </Label>
-                        <ComboBox fx:id="pizzaSize" prefHeight="26.0" prefWidth="127.0">
+                        <ComboBox fx:id="pizzaSize" onAction="#changePizzaSize" prefHeight="26.0" prefWidth="127.0">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>

@@ -118,4 +118,11 @@ public class PizzaController{
         price.clear();
         price.appendText("" + pizza.price());
     }
+
+    @FXML
+    void changePizzaSize(ActionEvent event) {
+        pizza.size = pizzaSize.getValue();
+        price.clear();
+        price.appendText("" + pizza.price());
+    }
 }
