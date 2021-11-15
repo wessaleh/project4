@@ -24,7 +24,7 @@
    <center>
       <VBox prefHeight="318.0" prefWidth="382.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="79.0" prefWidth="405.0" style="-fx-background-color: #f2f2b1; -fx-alignment: &quot;center&quot;;" text="RU Pizzeria" textFill="#cf4646">
+            <Label prefHeight="79.0" prefWidth="405.0" style="-fx-background-color: #f2f2b1; -fx-alignment: &quot;center&quot;;" text="RU Pizzeria Halal" textFill="#cf4646">
                <font>
                   <Font name="Comic Sans MS" size="27.0" />
                </font>
