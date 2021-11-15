@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Pepperoni extends Pizza{
     private final double DEFAULT_PRICE = 8.99;
+    private final double ESSENTIAL_TOPPINGS = 1;
 
     /**
      * Default constructor
@@ -35,7 +36,7 @@ public class Pepperoni extends Pizza{
         }
 
         if(numToppings > 1){
-            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - 1);
+            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - ESSENTIAL_TOPPINGS);
         }
 
         return totalPrice;

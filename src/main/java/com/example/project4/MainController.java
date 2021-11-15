@@ -1,11 +1,14 @@
 package com.example.project4;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.skin.SpinnerSkin;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -57,6 +60,10 @@ public class MainController {
         pizzaView.MIN_TOPPINGS = 5;
         pizzaView.pizza = createPizza("Deluxe");
 
+        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(
+                Topping.Sausage, Topping.GreenPepper, Topping.Onion, Topping.Pepperoni, Topping.Mushroom);
+        pizzaView.setDefaultValues();
+
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);
         stage.setTitle("Customize your Pizza");
@@ -83,6 +90,9 @@ public class MainController {
         pizzaView.MIN_TOPPINGS = 2;
         pizzaView.pizza = createPizza("Hawaiian");
 
+        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pineapple, Topping.Cheese);
+        pizzaView.setDefaultValues();
+
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);
         stage.setTitle("Customize your Pizza");
@@ -108,6 +118,9 @@ public class MainController {
         pizzaView.pizzaLabel.setText("Pepperoni");
         pizzaView.MIN_TOPPINGS = 1;
         pizzaView.pizza = createPizza("Pepperoni");
+
+        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pepperoni);
+        pizzaView.setDefaultValues();
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);

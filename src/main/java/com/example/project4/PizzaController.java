@@ -8,17 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
@@ -33,6 +31,12 @@ public class PizzaController{
     protected MainController mainController;
     protected int MIN_TOPPINGS;
     protected Pizza pizza;
+    private Alert error_message;
+    protected ObservableList<Topping> DEFAULT_TOPPINGS = FXCollections.observableArrayList();
+
+    private static final int NUM_DECIMAL_PLACES = 2;
+    private static final int NUM_INT_PLACES = 1;
+    private DecimalFormat money_Format;
 
     @FXML
     protected ImageView pizzaImage;
@@ -41,10 +45,10 @@ public class PizzaController{
     protected Button pizzaLabel;
 
     @FXML
-    private ComboBox<Size> pizzaSize;
+    protected ComboBox<Size> pizzaSize;
 
     @FXML
-    private TextField price;
+    protected TextField price;
 
     @FXML
     protected ListView<Topping> selectedToppings;
@@ -71,8 +75,23 @@ public class PizzaController{
         toppingsList.setItems(toppings);
         pizzaSize.setItems(pizzaSizes);
 
-        pizza = new Deluxe();
+        pizza = createPizza("Deluxe");
+        money_Format = new DecimalFormat("###,###.00");
+        money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
+        money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
+    }
+
+    /**
+     * Sets the default values of the pizza order stage
+     */
+    public void setDefaultValues() {
+        toppingsList.getItems().removeAll(DEFAULT_TOPPINGS);
+        selectedToppings.getItems().addAll(DEFAULT_TOPPINGS);
+        pizza.toppings = new ArrayList(selectedToppings.getItems());
         pizza.size = Size.Small;
+        pizzaSize.getSelectionModel().selectFirst();
+        price.clear();
+        price.appendText("" + money_Format.format(pizza.price()));
     }
 
     @FXML
@@ -81,10 +100,16 @@ public class PizzaController{
         // add to main controller's pizza list
     }
 
+    /**
+     * Adds a topping on the pizza
+     * @param event - the event to handle
+     */
     @FXML
     void addTopping(ActionEvent event) {
         if(selectedToppings.getItems().size() == MAX_TOPPINGS){
-            return; // ALERT too many toppings
+            error_message = new Alert(Alert.AlertType.ERROR);
+            error_message.setContentText("Cannot add more toppings.");
+            error_message.showAndWait();
         }
 
         Topping selectedTopping = toppingsList.getSelectionModel().getSelectedItem();
@@ -97,13 +122,20 @@ public class PizzaController{
         selectedToppings.getItems().add(selectedTopping);
         pizza.toppings = new ArrayList(selectedToppings.getItems());
         price.clear();
-        price.appendText("" + pizza.price());
+        price.appendText("" + money_Format.format(pizza.price()));
     }
 
+    /**
+     * Removes a topping from the pizza
+     * @param event - the event to handle
+     */
     @FXML
     void removeTopping(ActionEvent event) {
-        if(selectedToppings.getItems().size() == MIN_TOPPINGS){
-            // ALERT too few toppings but allow removal of toppings
+        if(DEFAULT_TOPPINGS.contains(selectedToppings.getSelectionModel().getSelectedItem())){
+            error_message = new Alert(Alert.AlertType.ERROR);
+            error_message.setContentText("Cannot remove this essential ingredient.");
+            error_message.showAndWait();
+            return;
         }
 
         Topping selectedTopping = selectedToppings.getSelectionModel().getSelectedItem();
@@ -116,13 +148,17 @@ public class PizzaController{
         toppingsList.getItems().add(selectedTopping);
         pizza.toppings = new ArrayList(selectedToppings.getItems());
         price.clear();
-        price.appendText("" + pizza.price());
+        price.appendText("" + money_Format.format(pizza.price()));
     }
 
+    /**
+     * Changes the size of the pizza on selection
+     * @param event - the event to handle
+     */
     @FXML
     void changePizzaSize(ActionEvent event) {
         pizza.size = pizzaSize.getValue();
         price.clear();
-        price.appendText("" + pizza.price());
+        price.appendText("" + money_Format.format(pizza.price()));
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Hawaiian extends Pizza{
     private final double DEFAULT_PRICE = 10.99;
+    private final int ESSENTIAL_TOPPINGS = 2;
 
     /**
      * Default constructor for hawaiian pizza
@@ -35,7 +36,7 @@ public class Hawaiian extends Pizza{
         }
 
         if(numToppings > 2){
-            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - 2);
+            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - ESSENTIAL_TOPPINGS);
         }
 
         return totalPrice;

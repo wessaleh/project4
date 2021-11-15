@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Deluxe extends Pizza{
     private final double DEFAULT_PRICE = 12.99;
+    private final int ESSENTIAL_TOPPINGS = 5;
 
     /**
      * Default constructor
@@ -35,7 +36,7 @@ public class Deluxe extends Pizza{
         }
 
         if(numToppings > 5){
-            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - 5);
+            totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - ESSENTIAL_TOPPINGS);
         }
 
         return totalPrice;
