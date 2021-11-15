@@ -1,7 +1,9 @@
 package com.example.project4;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+/**
+ * Controller for viewing and exporting store orders GUI
+ * @author Wesam Saleh
+ */
 
 public class StoreOrderController {
 

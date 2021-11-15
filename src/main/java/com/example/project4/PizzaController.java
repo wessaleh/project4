@@ -4,25 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-
-import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
 import static com.example.project4.PizzaMaker.createPizza;
+
+/**
+ * Controller for GUI that adds pizza to order
+ * @author Wesam Saleh
+ */
 
 public class PizzaController{
 
@@ -31,7 +22,7 @@ public class PizzaController{
     protected MainController mainController;
     protected int MIN_TOPPINGS;
     protected Pizza pizza;
-    private Alert error_message;
+    private Alert popup;
     protected ObservableList<Topping> DEFAULT_TOPPINGS = FXCollections.observableArrayList();
 
     private static final int NUM_DECIMAL_PLACES = 2;
@@ -64,7 +55,6 @@ public class PizzaController{
         this.mainController = controller;
     }
 
-
     /**
      * Initializes the pizza ordering stage
      */
@@ -94,22 +84,28 @@ public class PizzaController{
         price.appendText("" + money_Format.format(pizza.price()));
     }
 
+    /**
+     * Adds pizza to the current order
+     */
     @FXML
-    void addPizzaToOrder(ActionEvent event) {
-        // Create the pizza
-        // add to main controller's pizza list
+    void addPizzaToOrder() {
+        mainController.currentOrder.pizzas.add(pizza);
+        popup = new Alert(Alert.AlertType.INFORMATION);
+        popup.setTitle("Order");
+        popup.setContentText("Pizza added to the order!");
+        popup.showAndWait();
     }
 
     /**
      * Adds a topping on the pizza
-     * @param event - the event to handle
      */
     @FXML
-    void addTopping(ActionEvent event) {
+    void addTopping() {
         if(selectedToppings.getItems().size() == MAX_TOPPINGS){
-            error_message = new Alert(Alert.AlertType.ERROR);
-            error_message.setContentText("Cannot add more toppings.");
-            error_message.showAndWait();
+            popup = new Alert(Alert.AlertType.ERROR);
+            popup.setTitle("Adding toppings");
+            popup.setContentText("Cannot add more toppings. Maximum number of toppings is 7!");
+            popup.showAndWait();
         }
 
         Topping selectedTopping = toppingsList.getSelectionModel().getSelectedItem();
@@ -127,14 +123,14 @@ public class PizzaController{
 
     /**
      * Removes a topping from the pizza
-     * @param event - the event to handle
      */
     @FXML
-    void removeTopping(ActionEvent event) {
+    void removeTopping() {
         if(DEFAULT_TOPPINGS.contains(selectedToppings.getSelectionModel().getSelectedItem())){
-            error_message = new Alert(Alert.AlertType.ERROR);
-            error_message.setContentText("Cannot remove this essential ingredient.");
-            error_message.showAndWait();
+            popup = new Alert(Alert.AlertType.ERROR);
+            popup.setTitle("Removing toppings");
+            popup.setContentText("Cannot remove this essential ingredient.");
+            popup.showAndWait();
             return;
         }
 
@@ -153,10 +149,9 @@ public class PizzaController{
 
     /**
      * Changes the size of the pizza on selection
-     * @param event - the event to handle
      */
     @FXML
-    void changePizzaSize(ActionEvent event) {
+    void changePizzaSize() {
         pizza.size = pizzaSize.getValue();
         price.clear();
         price.appendText("" + money_Format.format(pizza.price()));

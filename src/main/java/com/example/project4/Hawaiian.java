@@ -1,6 +1,12 @@
 package com.example.project4;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+/**
+ * Hawaiian pizza class
+ * @author Wesam Saleh
+ */
 
 public class Hawaiian extends Pizza{
     private final double DEFAULT_PRICE = 10.99;
@@ -40,5 +46,25 @@ public class Hawaiian extends Pizza{
         }
 
         return totalPrice;
+    }
+
+    /**
+     * Creates string representation of pizza order
+     * @return - the pizza order in string form
+     */
+    @Override
+    public String toString() {
+        DecimalFormat money_Format = new DecimalFormat("###,###.00");
+        money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
+        money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
+
+        StringBuilder sb = new StringBuilder("Hawaiian pizza, ");
+
+        for(Topping topping: toppings){
+            sb.append(topping + ", ");
+        }
+
+        sb.append(money_Format.format(this.price()));
+        return sb.toString();
     }
 }

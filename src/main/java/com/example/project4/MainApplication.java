@@ -7,10 +7,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main Application class
+ * @author Wesam Saleh
+ */
+
 public class MainApplication extends Application {
+    MainController mainView;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+        mainView = fxmlLoader.getController();
         Scene scene = new Scene(fxmlLoader.load(), 390, 500);
         stage.setTitle("RU Pizza Store Front");
         stage.setScene(scene);

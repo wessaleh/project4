@@ -1,5 +1,10 @@
 package com.example.project4;
 
+/**
+ * Pizza Maker class
+ * @author Wesam Saleh
+ */
+
 public class PizzaMaker {
 
     /**
@@ -8,14 +13,12 @@ public class PizzaMaker {
      * @return the pizza
      */
     public static Pizza createPizza(String flavor){
-        if(flavor.equals("Hawaiian")){
-            return new Hawaiian();
-        }else if(flavor.equals("Deluxe")){
-            return new Deluxe();
-        }else if(flavor.equals("Pepperoni")){
-            return new Pepperoni();
-        }
+        return switch (flavor) {
+            case "Hawaiian" -> new Hawaiian();
+            case "Deluxe" -> new Deluxe();
+            case "Pepperoni" -> new Pepperoni();
+            default -> null;
+        };
 
-        return null;
     }
 }
