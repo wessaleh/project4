@@ -70,4 +70,10 @@ public class Deluxe extends Pizza{
         sb.append(money_Format.format(this.price()));
         return sb.toString();
     }
+
+    @Override
+    public Pizza copy() {
+        Pizza clone = new Deluxe(new ArrayList<Topping>(this.toppings), this.size);
+        return clone;
+    }
 }
