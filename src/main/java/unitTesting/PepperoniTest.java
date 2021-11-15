@@ -3,6 +3,7 @@ package unitTesting;
 import com.example.project4.Pepperoni;
 import com.example.project4.Size;
 import com.example.project4.Topping;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 class PepperoniTest {
-    @org.junit.jupiter.api.Test
+    @Test
     void price() {
         ArrayList<Topping> topping = new ArrayList<>();
 
