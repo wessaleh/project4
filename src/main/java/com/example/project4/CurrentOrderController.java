@@ -1,9 +1,12 @@
 package com.example.project4;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import java.text.DecimalFormat;
 
 /**
@@ -22,6 +25,7 @@ public class CurrentOrderController {
 
     private MainController mainController;
     private Alert error_message;
+    protected Stage stage;
 
     @FXML
     protected ListView<Pizza> cart;
@@ -67,10 +71,15 @@ public class CurrentOrderController {
             error_message.showAndWait();
         }
 
-        mainController.currentOrder.phoneNumber = phoneNumber.getText();
-        mainController.currentOrder.orderTotal = Double.parseDouble(orderTotal.getText());
+        Order orderToAdd = new Order();
+        orderToAdd.phoneNumber = phoneNumber.getText();
+        orderToAdd.pizzas = FXCollections.observableArrayList(mainController.currentOrder.pizzas);
+        orderToAdd.orderTotal = Double.parseDouble(orderTotal.getText());
+        mainController.storeOrders.orders.add(orderToAdd);
 
-        mainController.storeOrders.orders.add(mainController.currentOrder);
+        mainController.currentOrder.pizzas.removeAll(mainController.currentOrder.pizzas);
+        mainController.phoneNumber.clear();
+        stage.close();
     }
 
     /**

@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import static com.example.project4.PizzaMaker.createPizza;
 
 /**
@@ -90,6 +92,7 @@ public class MainController {
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Order Detail");
         stage.setScene(scene);
+        currentOrderView.stage = stage;
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
@@ -204,6 +207,10 @@ public class MainController {
         Parent root = loader.load();
         StoreOrderController storeOrderView = loader.getController();
         storeOrderView.setMainController(this);
+
+        for(Order order: storeOrders.orders) {
+            storeOrderView.phoneNumbers.getItems().add(order.phoneNumber);
+        }
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 600, 400);

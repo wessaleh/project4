@@ -1,5 +1,13 @@
 package com.example.project4;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 /**
  * Controller for viewing and exporting store orders GUI
  * @author Wesam Saleh
@@ -8,6 +16,72 @@ package com.example.project4;
 public class StoreOrderController {
 
     private MainController mainController;
+
+    @FXML
+    private TextField orderTotal;
+
+    @FXML
+    protected ComboBox<String> phoneNumbers;
+
+    @FXML
+    protected ListView<Pizza> storeOrder;
+
+    private Alert popup;
+    private static final int NUM_DECIMAL_PLACES = 2;
+    private static final int NUM_INT_PLACES = 1;
+    private DecimalFormat money_Format;
+
+    /**
+     * Loads the order for a given phone number
+     */
+    @FXML
+    void loadOrder() {
+        int orderIndex = phoneNumbers.getSelectionModel().getSelectedIndex();
+
+        if(orderIndex == -1){
+            return;
+        }
+
+        storeOrder.getItems().clear();
+        storeOrder.getItems().addAll(mainController.storeOrders.orders.get(orderIndex).pizzas);
+        orderTotal.clear();
+        orderTotal.appendText(money_Format.format(mainController.storeOrders.orders.get(orderIndex).orderTotal));
+    }
+
+    /**
+     * Cancels the selected order
+     */
+    @FXML
+    void cancelOrder() {
+        int orderIndex = phoneNumbers.getSelectionModel().getSelectedIndex();
+
+        if(orderIndex == -1){
+            popup = new Alert(Alert.AlertType.ERROR);
+            popup.setContentText("Please place an order first!");
+            popup.showAndWait();
+            return;
+        }
+
+        storeOrder.getItems().clear();
+        orderTotal.clear();
+        phoneNumbers.getItems().remove(orderIndex);
+        mainController.storeOrders.orders.remove(orderIndex);
+    }
+
+    /**
+     * Exports store orders to a file chosen by the user
+     */
+    @FXML
+    void exportStoreOrders() {
+
+    }
+
+    @FXML
+    public void initialize() {
+        money_Format = new DecimalFormat("###,###.00");
+        money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
+        money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
+    }
 
     /**
      * Connects this controller to main controller
