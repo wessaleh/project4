@@ -42,8 +42,10 @@ public class StoreOrderController {
             return;
         }
 
+        // loads the selected store order list view
         storeOrder.getItems().clear();
         storeOrder.getItems().addAll(mainController.storeOrders.orders.get(orderIndex).pizzas);
+        // loads the selected order total
         orderTotal.clear();
         orderTotal.appendText(money_Format.format(mainController.storeOrders.orders.get(orderIndex).orderTotal));
     }
@@ -55,6 +57,7 @@ public class StoreOrderController {
     void cancelOrder() {
         int orderIndex = phoneNumbers.getSelectionModel().getSelectedIndex();
 
+        // No order placed to remove
         if(orderIndex == -1){
             popup = new Alert(Alert.AlertType.ERROR);
             popup.setContentText("Please place an order first!");
@@ -62,9 +65,11 @@ public class StoreOrderController {
             return;
         }
 
+        // clears the store order view
         storeOrder.getItems().clear();
         orderTotal.clear();
         phoneNumbers.getItems().remove(orderIndex);
+        // removes the order from the store orders
         mainController.storeOrders.orders.remove(orderIndex);
     }
 
@@ -78,6 +83,7 @@ public class StoreOrderController {
 
     @FXML
     public void initialize() {
+        // sets the formatter to two decimal places
         money_Format = new DecimalFormat("###,###.00");
         money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
         money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);

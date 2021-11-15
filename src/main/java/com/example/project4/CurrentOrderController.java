@@ -46,12 +46,14 @@ public class CurrentOrderController {
      * Sets the values of the order prices
      */
     protected void setValues() {
+        // setting money_format to print to two decimal places
         money_Format = new DecimalFormat("###,###.00");
         money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
         money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
 
         double subTotal = mainController.getSubTotal();
 
+        // loading the new values for the totals
         subtotal.clear();
         subtotal.appendText("" + money_Format.format(subTotal));
         salesTax.clear();
@@ -65,18 +67,22 @@ public class CurrentOrderController {
      */
     @FXML
     void placeOrder() {
+        // Nothing added to order
         if(cart.getItems().size() == 0){
             error_message = new Alert(Alert.AlertType.ERROR);
             error_message.setContentText("Please add a pizza to the cart first.");
             error_message.showAndWait();
         }
 
+        // creating the new order
         Order orderToAdd = new Order();
         orderToAdd.phoneNumber = phoneNumber.getText();
         orderToAdd.pizzas = FXCollections.observableArrayList(mainController.currentOrder.pizzas);
         orderToAdd.orderTotal = Double.parseDouble(orderTotal.getText());
+        // adding to store orders
         mainController.storeOrders.orders.add(orderToAdd);
 
+        // clearing the current order
         mainController.currentOrder.pizzas.removeAll(mainController.currentOrder.pizzas);
         mainController.phoneNumber.clear();
         stage.close();
@@ -87,6 +93,7 @@ public class CurrentOrderController {
      */
     @FXML
     void removePizza() {
+        // No pizza to remove
         if(cart.getItems().size() == 0){
             error_message = new Alert(Alert.AlertType.ERROR);
             error_message.setContentText("Please add a pizza to the cart first.");
@@ -96,6 +103,7 @@ public class CurrentOrderController {
 
         Pizza pizzaToRemove = cart.getSelectionModel().getSelectedItem();
 
+        // No pizza selected to remove
         if(pizzaToRemove == null){
             error_message = new Alert(Alert.AlertType.ERROR);
             error_message.setContentText("Please select a pizza from the cart to remove.");
@@ -103,6 +111,7 @@ public class CurrentOrderController {
             return;
         }
 
+        // removing the selected pizza
         mainController.currentOrder.pizzas.remove(pizzaToRemove);
         cart.getItems().remove(pizzaToRemove);
         this.setValues();

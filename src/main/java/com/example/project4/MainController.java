@@ -36,6 +36,7 @@ public class MainController {
     public double getSubTotal() {
         double total = 0;
 
+        // adding up all pizza costs
         for(Pizza pizza: currentOrder.pizzas){
             total += pizza.price();
         }
@@ -51,9 +52,9 @@ public class MainController {
     public static boolean validatePhoneNumber(String number){
         try{
             Long.parseLong(number);
-            return number.length() == 10;
+            return number.length() == 10; // phone number must be 10 digits long
         }catch(NumberFormatException e){
-            return false;
+            return false; // not a valid phone number with 10 digits
         }
     }
 
@@ -63,6 +64,7 @@ public class MainController {
      */
     @FXML
     void viewCurrentOrder() throws IOException {
+        // No phone number provided
         if(phoneNumber.getText().isEmpty()){
             popup = new Alert(Alert.AlertType.ERROR);
             popup.setTitle("Phone number");
@@ -71,6 +73,7 @@ public class MainController {
             return;
         }
 
+        // phone number is invalid
         if(!validatePhoneNumber(phoneNumber.getText())){
             popup = new Alert(Alert.AlertType.ERROR);
             popup.setTitle("Phone number");
@@ -79,11 +82,13 @@ public class MainController {
             return;
         }
 
+        // loading current order view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("currentorder-view.fxml"));
         Parent root = loader.load();
         CurrentOrderController currentOrderView = loader.getController();
         currentOrderView.setMainController(this);
 
+        // setting the phone number and loading the current order
         currentOrderView.phoneNumber.appendText(phoneNumber.getText());
         currentOrderView.cart.setItems(currentOrder.pizzas);
         currentOrderView.setValues();
@@ -103,22 +108,27 @@ public class MainController {
      */
     @FXML
     void viewDeluxeOrder() throws IOException {
+        // alerting the user that new order is being added
         popup = new Alert(Alert.AlertType.CONFIRMATION);
         popup.setTitle("Ordering Pizzas");
         popup.setContentText("Starting a new order!");
         popup.showAndWait();
 
+        // loading pizza order view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-view.fxml"));
         Parent root = loader.load();
         PizzaController pizzaView = loader.getController();
         pizzaView.setMainController(this);
 
+        // setting the right image and text
         Image pizzaImage = new Image("file:./Deluxe.jpeg");
         pizzaView.pizzaImage.setImage(pizzaImage);
         pizzaView.pizzaLabel.setText("Deluxe");
         pizzaView.MIN_TOPPINGS = 5;
+        // creating the pizza
         pizzaView.pizza = createPizza("Deluxe");
 
+        // setting default toppings
         pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(
                 Topping.Sausage, Topping.GreenPepper, Topping.Onion, Topping.Pepperoni, Topping.Mushroom);
         pizzaView.setDefaultValues();
@@ -137,6 +147,7 @@ public class MainController {
      */
     @FXML
     void viewHawaiianOrder() throws IOException {
+        // alerting the user that new order is being added
         popup = new Alert(Alert.AlertType.CONFIRMATION);
         popup.setTitle("Ordering Pizzas");
         popup.setContentText("Starting a new order!");
@@ -147,12 +158,15 @@ public class MainController {
         PizzaController pizzaView = loader.getController();
         pizzaView.setMainController(this);
 
+        // setting the right image and text
         Image pizzaImage = new Image("file:./Hawaiian.jpeg");
         pizzaView.pizzaImage.setImage(pizzaImage);
         pizzaView.pizzaLabel.setText("Hawaiian");
         pizzaView.MIN_TOPPINGS = 2;
+        // creating the pizza
         pizzaView.pizza = createPizza("Hawaiian");
 
+        // setting default toppings
         pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pineapple, Topping.Cheese);
         pizzaView.setDefaultValues();
 
@@ -170,6 +184,7 @@ public class MainController {
      */
     @FXML
     void viewPepperoniOrder() throws IOException {
+        // alerting the user that new order is being added
         popup = new Alert(Alert.AlertType.CONFIRMATION);
         popup.setTitle("Ordering Pizzas");
         popup.setContentText("Starting a new order!");
@@ -180,12 +195,15 @@ public class MainController {
         PizzaController pizzaView = loader.getController();
         pizzaView.setMainController(this);
 
+        // setting the right image and text
         Image pizzaImage = new Image("file:./Pepperoni.jpeg");
         pizzaView.pizzaImage.setImage(pizzaImage);
         pizzaView.pizzaLabel.setText("Pepperoni");
         pizzaView.MIN_TOPPINGS = 1;
+        // creating the pizza
         pizzaView.pizza = createPizza("Pepperoni");
 
+        // setting default toppings
         pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pepperoni);
         pizzaView.setDefaultValues();
 
@@ -203,11 +221,13 @@ public class MainController {
      */
     @FXML
     void viewStoreOrders() throws IOException {
+        // loading store order view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("storeorder-view.fxml"));
         Parent root = loader.load();
         StoreOrderController storeOrderView = loader.getController();
         storeOrderView.setMainController(this);
 
+        // loading the order phone numbers for user to select
         for(Order order: storeOrders.orders) {
             storeOrderView.phoneNumbers.getItems().add(order.phoneNumber);
         }

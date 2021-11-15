@@ -35,12 +35,14 @@ public class Hawaiian extends Pizza{
         double totalPrice = DEFAULT_PRICE;
         int numToppings = this.toppings.size();
 
+        // accounting for pizza size
         if(this.size == Size.Medium){
             totalPrice += MEDIUM_UPCHARGE;
         }else if(this.size == Size.Large){
             totalPrice += LARGE_UPCHARGE;
         }
 
+        // accounting for number of toppings
         if(numToppings > 2){
             totalPrice += EXTRA_TOPPINGS_CHARGE * (numToppings - ESSENTIAL_TOPPINGS);
         }
@@ -54,6 +56,7 @@ public class Hawaiian extends Pizza{
      */
     @Override
     public String toString() {
+        // setting formatter to print to two decimal places
         DecimalFormat money_Format = new DecimalFormat("###,###.00");
         money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
         money_Format.setMinimumIntegerDigits(NUM_INT_PLACES);
