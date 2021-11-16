@@ -1,6 +1,7 @@
 package com.example.project4;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
@@ -28,19 +29,19 @@ public class CurrentOrderController {
     private Stage stage;
 
     @FXML
-    protected ListView<Pizza> cart;
+    private ListView<Pizza> cart;
 
     @FXML
-    protected TextField orderTotal;
+    private TextField orderTotal;
 
     @FXML
-    protected TextField phoneNumber;
+    private TextField phoneNumber;
 
     @FXML
-    public TextField salesTax;
+    private TextField salesTax;
 
     @FXML
-    public TextField subtotal;
+    private TextField subtotal;
 
     /**
      * Sets the values of the order prices
@@ -126,5 +127,11 @@ public class CurrentOrderController {
         this.mainController = controller;
     }
 
+    public void setPhoneNumberText(String text) {
+        phoneNumber.appendText(text);
+    }
 
+    public void setItemsInCart(ObservableList<Pizza> pizzasInCart){
+        cart.setItems(pizzasInCart);
+    }
 }

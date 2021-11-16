@@ -11,10 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import static com.example.project4.PizzaMaker.createPizza;
+import java.io.IOException;
 
 /**
  * Primary stage controller class
@@ -90,8 +88,8 @@ public class MainController {
         currentOrderView.setMainController(this);
 
         // setting the phone number and loading the current order
-        currentOrderView.phoneNumber.appendText(phoneNumber.getText());
-        currentOrderView.cart.setItems(currentOrder.pizzas);
+        currentOrderView.setPhoneNumberText(phoneNumber.getText());
+        currentOrderView.setItemsInCart(currentOrder.pizzas);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 600, 400);
