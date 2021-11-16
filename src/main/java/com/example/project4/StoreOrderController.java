@@ -84,6 +84,7 @@ public class StoreOrderController {
      */
     @FXML
     void exportStoreOrders() throws FileNotFoundException {
+        //Exports store orders to file:
         mainController.getStoreOrder().export();
     }
 

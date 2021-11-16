@@ -26,22 +26,26 @@ public class StoreOrders {
      * exports the store orders to a txt file
      */
     public void export() throws FileNotFoundException {
+        // Lets user choose File
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Open Target File for the Export");
         chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         Stage stage = new Stage();
-        File targetFile = chooser.showSaveDialog(stage);
-        PrintWriter printWriter = new PrintWriter(targetFile);
-        for (int i = 0; i < orders.size(); i++){
-            printWriter.println("Phone Number: " + orders.get(i).phoneNumber);
-            printWriter.println("Pizzas:");
-            for (int j = 0; j < orders.get(i).pizzas.size(); j++){
-                printWriter.println(orders.get(i).pizzas.get(j).toString());
+        File targetFile = chooser.showSaveDialog(stage); //get the reference of the target file
+        // Writes to the target file:
+        if (targetFile != null){
+            PrintWriter printWriter = new PrintWriter(targetFile);
+            for (int i = 0; i < orders.size(); i++){
+                printWriter.println("Phone Number: " + orders.get(i).phoneNumber);
+                printWriter.println("Pizzas:");
+                for (int j = 0; j < orders.get(i).pizzas.size(); j++){
+                    printWriter.println(orders.get(i).pizzas.get(j).toString());
+                }
+                printWriter.println("Total: " + orders.get(i).orderTotal);
+                printWriter.println();
             }
-            printWriter.println("Total: " + orders.get(i).orderTotal);
-            printWriter.println();
+            printWriter.close();
         }
-        printWriter.close();
     }
 }
