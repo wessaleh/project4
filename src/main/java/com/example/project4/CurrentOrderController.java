@@ -117,6 +117,7 @@ public class CurrentOrderController {
         // removing the selected pizza
         mainController.removePizzaFromOrder(pizzaToRemove);
         cart.getItems().remove(pizzaToRemove);
+        this.setValues(this.stage);
     }
 
     /**
@@ -127,10 +128,18 @@ public class CurrentOrderController {
         this.mainController = controller;
     }
 
+    /**
+     * Sets the phone number text field
+     * @param text - text to set
+     */
     public void setPhoneNumberText(String text) {
         phoneNumber.appendText(text);
     }
 
+    /**
+     * Sets the items in cart
+     * @param pizzasInCart - pizzas to populate the listview
+     */
     public void setItemsInCart(ObservableList<Pizza> pizzasInCart){
         cart.setItems(pizzasInCart);
     }
