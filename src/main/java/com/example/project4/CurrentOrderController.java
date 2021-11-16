@@ -25,7 +25,7 @@ public class CurrentOrderController {
 
     private MainController mainController;
     private Alert error_message;
-    protected Stage stage;
+    private Stage stage;
 
     @FXML
     protected ListView<Pizza> cart;
@@ -44,8 +44,11 @@ public class CurrentOrderController {
 
     /**
      * Sets the values of the order prices
+     * @param stage - the stage to set
      */
-    protected void setValues() {
+    protected void setValues(Stage stage) {
+        this.stage = stage;
+
         // setting money_format to print to two decimal places
         money_Format = new DecimalFormat("###,###.00");
         money_Format.setMinimumFractionDigits(NUM_DECIMAL_PLACES);
@@ -77,14 +80,13 @@ public class CurrentOrderController {
         // creating the new order
         Order orderToAdd = new Order();
         orderToAdd.phoneNumber = phoneNumber.getText();
-        orderToAdd.pizzas = FXCollections.observableArrayList(mainController.currentOrder.pizzas);
+        orderToAdd.pizzas = FXCollections.observableArrayList(mainController.getCurrentOrderPizzas());
         orderToAdd.orderTotal = Double.parseDouble(orderTotal.getText());
         // adding to store orders
-        mainController.storeOrders.orders.add(orderToAdd);
+        mainController.addOrderToStoreOrders(orderToAdd);
 
         // clearing the current order
-        mainController.currentOrder.pizzas.removeAll(mainController.currentOrder.pizzas);
-        mainController.phoneNumber.clear();
+        mainController.clearOrder();
         stage.close();
     }
 
@@ -112,9 +114,8 @@ public class CurrentOrderController {
         }
 
         // removing the selected pizza
-        mainController.currentOrder.pizzas.remove(pizzaToRemove);
+        mainController.removePizzaFromOrder(pizzaToRemove);
         cart.getItems().remove(pizzaToRemove);
-        this.setValues();
     }
 
     /**

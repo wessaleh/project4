@@ -27,10 +27,10 @@ public class StoreOrderController {
     private TextField orderTotal;
 
     @FXML
-    protected ComboBox<String> phoneNumbers;
+    private ComboBox<String> phoneNumbers;
 
     @FXML
-    protected ListView<Pizza> storeOrder;
+    private ListView<Pizza> storeOrder;
 
     private Alert popup;
     private static final int NUM_DECIMAL_PLACES = 2;
@@ -50,10 +50,10 @@ public class StoreOrderController {
 
         // loads the selected store order list view
         storeOrder.getItems().clear();
-        storeOrder.getItems().addAll(mainController.storeOrders.orders.get(orderIndex).pizzas);
+        storeOrder.getItems().addAll(mainController.getStoreOrder().orders.get(orderIndex).pizzas);
         // loads the selected order total
         orderTotal.clear();
-        orderTotal.appendText(money_Format.format(mainController.storeOrders.orders.get(orderIndex).orderTotal));
+        orderTotal.appendText(money_Format.format(mainController.getStoreOrder().orders.get(orderIndex).orderTotal));
     }
 
     /**
@@ -76,7 +76,7 @@ public class StoreOrderController {
         orderTotal.clear();
         phoneNumbers.getItems().remove(orderIndex);
         // removes the order from the store orders
-        mainController.storeOrders.orders.remove(orderIndex);
+        mainController.getStoreOrder().orders.remove(orderIndex);
     }
 
     /**
@@ -84,7 +84,7 @@ public class StoreOrderController {
      */
     @FXML
     void exportStoreOrders() throws FileNotFoundException {
-        mainController.storeOrders.export();
+        mainController.getStoreOrder().export();
     }
 
     @FXML
@@ -102,4 +102,9 @@ public class StoreOrderController {
     public void setMainController(MainController controller){
         this.mainController = controller;
     }
+
+    public void addPhoneNumberToList(String number){
+        phoneNumbers.getItems().add(number);
+    }
+
 }

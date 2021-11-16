@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static com.example.project4.PizzaMaker.createPizza;
 
@@ -19,33 +21,33 @@ public class PizzaController{
 
     private final int MAX_TOPPINGS = 7;
 
-    protected MainController mainController;
-    protected int MIN_TOPPINGS;
-    protected Pizza pizza;
+    private MainController mainController;
+    private int MIN_TOPPINGS;
+    private Pizza pizza;
     private Alert popup;
-    protected ObservableList<Topping> DEFAULT_TOPPINGS = FXCollections.observableArrayList();
+    private ObservableList<Topping> DEFAULT_TOPPINGS = FXCollections.observableArrayList();
 
     private static final int NUM_DECIMAL_PLACES = 2;
     private static final int NUM_INT_PLACES = 1;
     private DecimalFormat money_Format;
 
     @FXML
-    protected ImageView pizzaImage;
+    private ImageView pizzaImage;
 
     @FXML
-    protected Button pizzaLabel;
+    private Button pizzaLabel;
 
     @FXML
-    protected ComboBox<Size> pizzaSize;
+    private ComboBox<Size> pizzaSize;
 
     @FXML
-    protected TextField price;
+    private TextField price;
 
     @FXML
-    protected ListView<Topping> selectedToppings;
+    private ListView<Topping> selectedToppings;
 
     @FXML
-    protected ListView<Topping> toppingsList;
+    private ListView<Topping> toppingsList;
 
     /**
      * Connects this controller to main controller
@@ -78,10 +80,20 @@ public class PizzaController{
     /**
      * Sets the default values of the pizza order stage
      */
-    public void setDefaultValues() {
+    public void setDefaultValues(Image img, String pizzaType, int minToppings, ObservableList<Topping> toppings) {
+        DEFAULT_TOPPINGS = toppings;
+
         // Setting the default list view values
         toppingsList.getItems().removeAll(DEFAULT_TOPPINGS);
         selectedToppings.getItems().addAll(DEFAULT_TOPPINGS);
+
+        // Setting the pizza image, label, and minimum number of toppings
+        pizzaImage.setImage(img);
+        pizzaLabel.setText(pizzaType);
+        MIN_TOPPINGS = minToppings;
+
+        // creating the pizza
+        pizza = createPizza(pizzaType);
 
         // setting default value for the pizza
         pizza.toppings = new ArrayList(selectedToppings.getItems());
@@ -98,7 +110,7 @@ public class PizzaController{
     void addPizzaToOrder() {
         // adding pizza to current order
         Pizza pizzaToAdd = pizza.copy();
-        mainController.currentOrder.pizzas.add(pizzaToAdd);
+        mainController.addPizzaToCurrentOrder(pizzaToAdd);
 
         // alerting the user that the pizza has been added
         popup = new Alert(Alert.AlertType.INFORMATION);

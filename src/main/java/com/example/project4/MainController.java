@@ -1,6 +1,7 @@
 package com.example.project4;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,12 +23,12 @@ import static com.example.project4.PizzaMaker.createPizza;
 
 public class MainController {
 
-    protected final Order currentOrder = new Order();
-    protected final StoreOrders storeOrders = new StoreOrders();
+    private final Order currentOrder = new Order();
+    private final StoreOrders storeOrders = new StoreOrders();
     private Alert popup;
 
     @FXML
-    protected TextField phoneNumber;
+    private TextField phoneNumber;
 
     /**
      * Gets the total of all pizzas in the current order
@@ -91,13 +92,12 @@ public class MainController {
         // setting the phone number and loading the current order
         currentOrderView.phoneNumber.appendText(phoneNumber.getText());
         currentOrderView.cart.setItems(currentOrder.pizzas);
-        currentOrderView.setValues();
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Order Detail");
         stage.setScene(scene);
-        currentOrderView.stage = stage;
+        currentOrderView.setValues(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
@@ -122,16 +122,13 @@ public class MainController {
 
         // setting the right image and text
         Image pizzaImage = new Image("file:./Deluxe.jpeg");
-        pizzaView.pizzaImage.setImage(pizzaImage);
-        pizzaView.pizzaLabel.setText("Deluxe");
-        pizzaView.MIN_TOPPINGS = 5;
-        // creating the pizza
-        pizzaView.pizza = createPizza("Deluxe");
-
         // setting default toppings
-        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(
+        ObservableList<Topping> toppings = FXCollections.observableArrayList(
                 Topping.Sausage, Topping.GreenPepper, Topping.Onion, Topping.Pepperoni, Topping.Mushroom);
-        pizzaView.setDefaultValues();
+
+        int minToppings = 5;
+
+        pizzaView.setDefaultValues(pizzaImage, "Deluxe", minToppings, toppings);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);
@@ -160,15 +157,11 @@ public class MainController {
 
         // setting the right image and text
         Image pizzaImage = new Image("file:./Hawaiian.jpeg");
-        pizzaView.pizzaImage.setImage(pizzaImage);
-        pizzaView.pizzaLabel.setText("Hawaiian");
-        pizzaView.MIN_TOPPINGS = 2;
-        // creating the pizza
-        pizzaView.pizza = createPizza("Hawaiian");
-
         // setting default toppings
-        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pineapple, Topping.Cheese);
-        pizzaView.setDefaultValues();
+        ObservableList<Topping> toppings = FXCollections.observableArrayList(Topping.Pineapple, Topping.Cheese);
+        int minToppings = 2;
+
+        pizzaView.setDefaultValues(pizzaImage, "Hawaiian", minToppings, toppings);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);
@@ -197,15 +190,12 @@ public class MainController {
 
         // setting the right image and text
         Image pizzaImage = new Image("file:./Pepperoni.jpeg");
-        pizzaView.pizzaImage.setImage(pizzaImage);
-        pizzaView.pizzaLabel.setText("Pepperoni");
-        pizzaView.MIN_TOPPINGS = 1;
-        // creating the pizza
-        pizzaView.pizza = createPizza("Pepperoni");
 
         // setting default toppings
-        pizzaView.DEFAULT_TOPPINGS = FXCollections.observableArrayList(Topping.Pepperoni);
-        pizzaView.setDefaultValues();
+        ObservableList<Topping> toppings = FXCollections.observableArrayList(Topping.Pepperoni);
+        int minToppings = 1;
+
+        pizzaView.setDefaultValues(pizzaImage, "Pepperoni", minToppings, toppings);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root, 430, 516);
@@ -229,7 +219,7 @@ public class MainController {
 
         // loading the order phone numbers for user to select
         for(Order order: storeOrders.orders) {
-            storeOrderView.phoneNumbers.getItems().add(order.phoneNumber);
+            storeOrderView.addPhoneNumberToList(order.phoneNumber);
         }
 
         Stage stage = new Stage();
@@ -238,6 +228,35 @@ public class MainController {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+    }
+
+    /**
+     * adds pizza to current order
+     * @param pizza - pizza to add
+     */
+    public void addPizzaToCurrentOrder(Pizza pizza){
+        currentOrder.pizzas.add(pizza);
+    }
+
+    public void addOrderToStoreOrders(Order order){
+        storeOrders.orders.add(order);
+    }
+
+    public void clearOrder() {
+        currentOrder.pizzas.removeAll(currentOrder.pizzas);
+        phoneNumber.clear();
+    }
+
+    public void removePizzaFromOrder(Pizza pizza){
+        currentOrder.pizzas.remove(pizza);
+    }
+
+    public ObservableList<Pizza> getCurrentOrderPizzas() {
+        return currentOrder.pizzas;
+    }
+
+    public StoreOrders getStoreOrder() {
+        return storeOrders;
     }
 
 }
