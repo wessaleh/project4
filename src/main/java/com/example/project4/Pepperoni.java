@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 
 public class Pepperoni extends Pizza{
-    private final double DEFAULT_PRICE = 8.99;
-    private final double ESSENTIAL_TOPPINGS = 1;
+    private static final double DEFAULT_PRICE = 8.99;
+    private static final double ESSENTIAL_TOPPINGS = 1;
 
     /**
      * Default constructor

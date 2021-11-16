@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 
 public class Hawaiian extends Pizza{
-    private final double DEFAULT_PRICE = 10.99;
-    private final int ESSENTIAL_TOPPINGS = 2;
+    private static final double DEFAULT_PRICE = 10.99;
+    private static final int ESSENTIAL_TOPPINGS = 2;
 
     /**
      * Default constructor for hawaiian pizza
