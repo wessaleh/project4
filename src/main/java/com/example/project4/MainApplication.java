@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * Main Application class
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class MainApplication extends Application {

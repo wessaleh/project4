@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Store Orders class for keeping track of orders and exporting them
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class StoreOrders {
@@ -15,12 +15,5 @@ public class StoreOrders {
      */
     public StoreOrders(){
         this.orders = new ArrayList<>();
-    }
-
-    /**
-     * exports the store orders to a txt file
-     */
-    public void export(){
-
     }
 }

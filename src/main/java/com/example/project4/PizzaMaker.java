@@ -2,7 +2,7 @@ package com.example.project4;
 
 /**
  * Pizza Maker class
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class PizzaMaker {

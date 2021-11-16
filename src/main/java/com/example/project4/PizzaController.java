@@ -12,7 +12,7 @@ import static com.example.project4.PizzaMaker.createPizza;
 
 /**
  * Controller for GUI that adds pizza to order
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class PizzaController{

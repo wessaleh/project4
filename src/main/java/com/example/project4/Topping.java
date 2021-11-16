@@ -2,7 +2,7 @@ package com.example.project4;
 
 /**
  * Enum class for pizza toppings
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public enum Topping {

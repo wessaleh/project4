@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Pizza class
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public abstract class Pizza {

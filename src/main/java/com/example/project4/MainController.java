@@ -17,7 +17,7 @@ import static com.example.project4.PizzaMaker.createPizza;
 
 /**
  * Primary stage controller class
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class MainController {

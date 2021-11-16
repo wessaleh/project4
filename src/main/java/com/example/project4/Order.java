@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 /**
  * Order class that holds the pizzas, phone number, and order total for a pizza order
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class Order {

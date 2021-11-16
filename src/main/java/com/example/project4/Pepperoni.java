@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Pepperoni pizza class
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class Pepperoni extends Pizza{

@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 /**
  * Controller for Current Order GUI
  * This would be the cart for the pizza order
- * @author Wesam Saleh
+ * @author Wesam Saleh, Najibullah Assadullah
  */
 
 public class CurrentOrderController {
