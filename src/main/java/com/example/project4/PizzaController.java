@@ -97,7 +97,8 @@ public class PizzaController{
     @FXML
     void addPizzaToOrder() {
         // adding pizza to current order
-        mainController.currentOrder.pizzas.add(pizza);
+        Pizza pizzaToAdd = pizza.copy();
+        mainController.currentOrder.pizzas.add(pizzaToAdd);
 
         // alerting the user that the pizza has been added
         popup = new Alert(Alert.AlertType.INFORMATION);

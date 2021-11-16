@@ -22,4 +22,10 @@ public abstract class Pizza {
      * @return - the price of the pizza
      */
     public abstract double price();
+
+    /**
+     * Creates a copy of this given pizza
+     * @return pizza copy
+     */
+    public abstract Pizza copy();
 }
