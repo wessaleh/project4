@@ -79,6 +79,10 @@ public class PizzaController{
 
     /**
      * Sets the default values of the pizza order stage
+     * @param img - the image to set
+     * @param pizzaType - the type of pizza
+     * @param minToppings - the minimum number of toppings
+     * @param toppings - the default toppings for this pizza
      */
     public void setDefaultValues(Image img, String pizzaType, int minToppings, ObservableList<Topping> toppings) {
         DEFAULT_TOPPINGS = toppings;

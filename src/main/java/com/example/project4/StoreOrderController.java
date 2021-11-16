@@ -103,6 +103,10 @@ public class StoreOrderController {
         this.mainController = controller;
     }
 
+    /**
+     * Adds a phone number the phone numbers list
+     * @param number - the number to add
+     */
     public void addPhoneNumberToList(String number){
         phoneNumbers.getItems().add(number);
     }

@@ -238,23 +238,42 @@ public class MainController {
         currentOrder.pizzas.add(pizza);
     }
 
+    /**
+     * Adds an order to the store orders
+     * @param order - order to add
+     */
     public void addOrderToStoreOrders(Order order){
         storeOrders.orders.add(order);
     }
 
+    /**
+     * Clears the current order
+     */
     public void clearOrder() {
         currentOrder.pizzas.removeAll(currentOrder.pizzas);
         phoneNumber.clear();
     }
 
+    /**
+     * Removes a pizza from current order
+     * @param pizza - the pizza to remove
+     */
     public void removePizzaFromOrder(Pizza pizza){
         currentOrder.pizzas.remove(pizza);
     }
 
+    /**
+     * Gets the current order
+     * @return - the current order
+     */
     public ObservableList<Pizza> getCurrentOrderPizzas() {
         return currentOrder.pizzas;
     }
 
+    /**
+     * Gets the store orders
+     * @return - the store order
+     */
     public StoreOrders getStoreOrder() {
         return storeOrders;
     }
